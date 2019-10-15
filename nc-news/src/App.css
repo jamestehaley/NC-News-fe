@@ -14,18 +14,82 @@
   grid-area: header;
   color: red;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr 1fr;
   border: solid 2px green;
 }
 .topic {
   grid-area: topic;
   border: solid 2px red;
+  overflow-y: scroll;
 }
 .main {
   grid-area: main;
   border: solid 2px yellow;
+  overflow-y: scroll;
 }
 .footer {
   grid-area: footer;
   border: solid 2px blue;
+}
+.articleCard {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  grid-template-rows: 2fr 1fr 1fr;
+  grid-template-areas:
+    "cardTitle cardTitle cardTopic"
+    "cardAuthor cardPublished ."
+    "cardVotes . cardComments";
+  border: solid 2px purple;
+  text-decoration: none;
+  color: black;
+}
+.article {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  grid-template-rows: 2fr 1fr 6fr 1fr auto;
+  grid-template-areas:
+    "cardTitle cardTitle cardTitle"
+    "cardAuthor cardPublished cardTopic"
+    "cardBody cardBody cardBody"
+    "cardVotes . cardComments"
+    "comments comments comments";
+  border: solid 2px purple;
+  text-decoration: none;
+  color: black;
+  justify-content: stretch;
+}
+.comments {
+  grid-area: comments;
+  border: solid 2px gold;
+}
+.cardTitle {
+  grid-area: cardTitle;
+  border: solid 2px orange;
+}
+.cardTopic {
+  grid-area: cardTopic;
+  border: solid 2px pink;
+}
+.cardAuthor {
+  grid-area: cardAuthor;
+  border: solid 2px cyan;
+}
+.cardPublished {
+  grid-area: cardPublished;
+  border: solid 2px black;
+}
+.cardVotes {
+  grid-area: cardVotes;
+  border: solid 2px rgb(35, 88, 56);
+}
+.cardComments {
+  grid-area: cardComments;
+  border: solid 2px rgb(231, 228, 33);
+}
+.cardBody {
+  grid-area: cardBody;
+  border: solid 2px darkblue;
+}
+li {
+  list-style: none;
 }

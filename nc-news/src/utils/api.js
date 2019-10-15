@@ -9,7 +9,16 @@ exports.getAllTopics = async () => {
   return data.topics;
 };
 
-exports.getArticles = async () => {
-  const { data } = await request.get("/articles");
-  return data.articles;
+exports.getArticles = async topic => {
+  const { data } = await request.get("/articles", { params: { topic } });
+  return data;
+};
+
+exports.getArticle = async uri => {
+  const { data } = await request.get(uri);
+  return data.article;
+};
+exports.getComments = async uri => {
+  const { data } = await request.get(`${uri}/comments`);
+  return data.comments;
 };

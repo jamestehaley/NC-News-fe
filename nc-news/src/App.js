@@ -5,6 +5,7 @@ import HeadBar from "./components/HeadBar";
 import TopicBar from "./components/TopicBar";
 import Footer from "./components/Footer";
 import Articles from "./components/Articles";
+import Article from "./components/Article";
 import * as api from "./utils/api";
 import React, { Component } from "react";
 
@@ -26,6 +27,7 @@ export default class App extends Component {
         <Router className="main">
           <Articles path="/" />
           <Articles path="/:topic" />
+          <Article path="/articles/:article_id" />
         </Router>
 
         <Footer />
@@ -53,8 +55,10 @@ export default class App extends Component {
     } else {
       const description = this.state.topics.find(topic => {
         return topic.slug === selected;
-      }).description;
-      this.setState({ selected: description });
+      });
+      if (description) {
+        this.setState({ selected: description.description });
+      }
     }
   };
   resetTopic = () => {
