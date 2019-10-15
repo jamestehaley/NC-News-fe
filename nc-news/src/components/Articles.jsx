@@ -16,7 +16,11 @@ export default class Articles extends Component {
             Total {this.props.topic && `${this.props.topic} `}Articles:{" "}
             {this.state.article_count}
           </p>
-          <select>
+          <select
+            onClick={() => {
+              this.fetchArticles(DEALTHIS);
+            }}
+          >
             <option value="recent">Most recent</option>
             <option value="old">Oldest</option>
             <option value="comments">Most comments</option>
@@ -31,21 +35,19 @@ export default class Articles extends Component {
     );
   }
   componentDidMount() {
-    api.getArticles(this.props.topic).then(data => {
+    this.fetchArticles();
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      this.fetchArticles();
+    }
+  }
+  fetchArticles = sort => {
+    api.getArticles(this.props.topic, sort).then(data => {
       this.setState({
         articles: data.articles,
         article_count: data.article_count
       });
     });
-  }
-  componentDidUpdate(prevProps) {
-    if (prevProps !== this.props) {
-      api.getArticles(this.props.topic).then(data => {
-        this.setState({
-          articles: data.articles,
-          article_count: data.article_count
-        });
-      });
-    }
-  }
+  };
 }
