@@ -7,7 +7,7 @@ export default class TopicBar extends Component {
 
   render() {
     return (
-      <div className="topic">
+      <nav className="topic">
         <li>
           <Link to="/" onClick={this.props.resetTopic}>
             All Articles
@@ -16,13 +16,13 @@ export default class TopicBar extends Component {
         {this.props.topics.map(topic => {
           return (
             <li key={topic.slug} onClick={this.props.selectTopic}>
-              <Link to={`/${topic.slug}`}>
+              <Link to={`/topics/${topic.slug}`}>
                 {topic.slug.charAt(0).toUpperCase() + topic.slug.slice(1)}
               </Link>
             </li>
           );
         })}
-      </div>
+      </nav>
     );
   }
 }

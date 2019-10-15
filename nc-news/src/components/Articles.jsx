@@ -9,15 +9,25 @@ export default class Articles extends Component {
   };
   render() {
     return (
-      <div>
-        <p>
-          Total Articles{this.props.topic && ` about ${this.props.topic}`}:{" "}
-          {this.state.article_count}
-        </p>
+      <main>
+        <details>
+          <summary>Advanced</summary>
+          <p>
+            Total {this.props.topic && `${this.props.topic} `}Articles:{" "}
+            {this.state.article_count}
+          </p>
+          <select>
+            <option value="recent">Most recent</option>
+            <option value="old">Oldest</option>
+            <option value="comments">Most comments</option>
+            <option value="votes">Most votes</option>
+          </select>
+        </details>
+
         {this.state.articles.map(article => {
           return <ArticleCard key={article.article_id} article={article} />;
         })}
-      </div>
+      </main>
     );
   }
   componentDidMount() {

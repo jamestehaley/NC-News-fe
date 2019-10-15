@@ -9,8 +9,10 @@ exports.getAllTopics = async () => {
   return data.topics;
 };
 
-exports.getArticles = async topic => {
-  const { data } = await request.get("/articles", { params: { topic } });
+exports.getArticles = async (topic, sort_by) => {
+  const { data } = await request.get("/articles", {
+    params: { topic, sort_by }
+  });
   return data;
 };
 

@@ -8,6 +8,7 @@ import Articles from "./components/Articles";
 import Article from "./components/Article";
 import * as api from "./utils/api";
 import React, { Component } from "react";
+import Errors from "./components/Errors";
 
 export default class App extends Component {
   state = {
@@ -25,8 +26,9 @@ export default class App extends Component {
           resetTopic={this.resetTopic}
         />
         <Router className="main">
+          <Errors default />
           <Articles path="/" />
-          <Articles path="/:topic" />
+          <Articles path="/topics/:topic" />
           <Article path="/articles/:article_id" />
         </Router>
 
