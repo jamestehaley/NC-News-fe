@@ -28,7 +28,7 @@ export default class Article extends Component {
         <p className="cardVotes">{`Votes: ${votes}`}</p>
         <p className="cardComments">{`Comments: ${comment_count}`}</p>
         {Object.keys(this.state.article).length > 0 && (
-          <CommentsList uri={this.props.uri} />
+          <CommentsList user={this.props.user} uri={this.props.uri} />
         )}
       </article>
     );

@@ -97,5 +97,17 @@ li {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 2fr 1fr;
-  grid-template-areas: "cardAuthor cardPublished" "cardBody cardBody" ". cardVotes";
+  grid-template-areas: "cardAuthor cardPublished" "cardBody cardBody" "delete cardVotes";
+}
+.delete {
+  grid-area: delete;
+  border: solid 2px deeppink;
+}
+
+.rotate {
+  transform: rotate(90deg);
+}
+.voter {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }

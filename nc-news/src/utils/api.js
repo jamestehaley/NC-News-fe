@@ -9,9 +9,9 @@ exports.getAllTopics = async () => {
   return data.topics;
 };
 
-exports.getArticles = async (topic, sort_by) => {
+exports.getArticles = async (topic, sort_by, order) => {
   const { data } = await request.get("/articles", {
-    params: { topic, sort_by }
+    params: { topic, sort_by, order }
   });
   return data;
 };
@@ -23,4 +23,10 @@ exports.getArticle = async uri => {
 exports.getComments = async uri => {
   const { data } = await request.get(`${uri}/comments`);
   return data.comments;
+};
+exports.PostComment = async (body, username, uri) => {
+  await request.post(`${uri}/comments`, { username, body });
+};
+exports.deleteComment = async id => {
+  await request.delete(`/comments/${id}`);
 };

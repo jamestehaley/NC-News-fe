@@ -14,7 +14,7 @@ export default class App extends Component {
   state = {
     topics: [],
     selected: "",
-    user: "James"
+    user: "jessjelly"
   };
   render() {
     return (
@@ -29,15 +29,15 @@ export default class App extends Component {
           <Errors default />
           <Articles path="/" />
           <Articles path="/topics/:topic" />
-          <Article path="/articles/:article_id" />
+          <Article user={this.state.user} path="/articles/:article_id" />
         </Router>
 
         <Footer />
       </div>
     );
   }
-  componentDidMount = async () => {
-    await this.getTopics();
+  componentDidMount = () => {
+    this.getTopics();
   };
   getTopics = () => {
     api.getAllTopics().then(topics => {
@@ -48,22 +48,24 @@ export default class App extends Component {
   selectTopic = event => {
     let selected = "";
     if (!event) {
-      selected = window.location.pathname.slice(1);
+      selected = window.location.pathname.slice(8);
     } else {
       selected = event.target.text.toLowerCase();
     }
     if (selected.length === 0) {
-      this.setState({ selected: "" });
+      this.setState({ selected: "All Stories" });
     } else {
       const description = this.state.topics.find(topic => {
         return topic.slug === selected;
       });
       if (description) {
         this.setState({ selected: description.description });
+      } else {
+        this.setState({ selected: "All Stories" });
       }
     }
   };
   resetTopic = () => {
-    this.setState({ selected: "" });
+    this.setState({ selected: "All Stories" });
   };
 }
