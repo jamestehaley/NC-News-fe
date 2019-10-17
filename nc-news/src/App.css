@@ -1,14 +1,26 @@
+@font-face {
+  font-family: GothamBook;
+  src: url("/fonts/gothambook-webfont.woff") format("woff"),
+    url("/fonts/gothambook-webfont.woff2") format("woff2")
+      url("/fonts/gothambook-webfont.ttf") format("truetype");
+}
 .App {
+  font-family: GothamBook;
   text-align: center;
   height: 100vh;
-
+  color: #0b0c0c;
+  background: #ffffff;
   display: grid;
-  grid-template-columns: 1fr 10fr;
+  grid-template-columns: 0fr 10fr;
   grid-template-rows: 1fr 13fr;
   grid-template-areas:
     "header header"
     "topic  main";
 }
+/*ba1f31 salmon*/
+/*EDEDED light grey */
+/*202829 dark grey */
+
 .header {
   grid-area: header;
   color: red;
@@ -173,5 +185,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   background: rgba(0, 0, 0, 0.3);
 }
 :visited {
-  color: red;
+  color: black;
+}
+@media only screen and (max-width: 600px) {
 }
