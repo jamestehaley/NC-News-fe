@@ -26,7 +26,11 @@ export default class CommentCard extends Component {
               />
             )}
             <div className="cardVotes">
-              <Voter votes={comment.votes} />
+              <Voter
+                votes={comment.votes}
+                type="comments"
+                id={comment.comment_id}
+              />
             </div>
           </>
         )}
@@ -35,6 +39,8 @@ export default class CommentCard extends Component {
     );
   }
   optimisticDelete = () => {
-    this.setState({ deleted: true });
+    this.setState(currentState => {
+      return { deleted: !currentState.deleted };
+    });
   };
 }

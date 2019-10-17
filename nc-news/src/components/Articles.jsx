@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
 import ArticleCard from "./ArticleCard";
+import Pagination from "./Pagination";
 
 export default class Articles extends Component {
   state = {
     articles: [],
     article_count: 0,
     sort_by: "created_at",
-    order: "desc"
+    order: "desc",
+    p: 0
   };
   render() {
     return (
@@ -18,34 +20,48 @@ export default class Articles extends Component {
         </p>
 
         <span>Sort by: </span>
+
         <select onChange={this.changeSort}>
           <option value="newest">Newest</option>
           <option value="oldest">Oldest</option>
           <option value="comments">Most comments</option>
           <option value="votes">Most votes</option>
         </select>
-
+        {this.state.article_count > 10 && (
+          <Pagination
+            p={this.state.p}
+            changePage={this.changePage}
+            total={Math.floor(this.state.article_count / 10)}
+          />
+        )}
         {this.state.articles.map(article => {
           return <ArticleCard key={article.article_id} article={article} />;
         })}
+        {this.state.article_count > 10 && (
+          <Pagination
+            p={this.state.p}
+            changePage={this.changePage}
+            total={Math.floor(this.state.article_count / 10)}
+          />
+        )}
       </main>
     );
   }
   componentDidMount() {
     const sort_by = JSON.parse(localStorage.getItem("sort_by"));
     const order = JSON.parse(localStorage.getItem("order"));
-    console.log("saved data for sort", sort_by, order);
     this.setState({ order, sort_by }, () => {
       this.fetchArticles();
     });
   }
   componentDidUpdate(prevProps) {
     if (prevProps.topic !== this.props.topic) {
-      this.fetchArticles();
+      this.setState({ p: 0 }, () => {
+        this.fetchArticles();
+      });
     }
   }
   componentWillUnmount() {
-    console.log(this.state.sort_by, this.state.order);
     localStorage.setItem("sort_by", JSON.stringify(this.state.sort_by));
     localStorage.setItem("order", JSON.stringify(this.state.order));
   }
@@ -65,13 +81,19 @@ export default class Articles extends Component {
       sort_by = "created_at";
       order = "desc";
     }
-    this.setState({ order, sort_by }, () => {
+    this.setState({ order, sort_by, p: 0 }, () => {
       this.fetchArticles();
     });
   };
   fetchArticles = () => {
     api
-      .getArticles(this.props.topic, this.state.sort_by, this.state.order)
+      .getArticles(
+        this.props.topic,
+        this.state.sort_by,
+        this.state.order,
+        this.props.author,
+        this.state.p
+      )
       .then(data => {
         this.setState({
           articles: data.articles,
@@ -79,5 +101,17 @@ export default class Articles extends Component {
         });
       })
       .catch(console.dir);
+  };
+  changePage = value => {
+    this.setState(
+      currentState => {
+        return {
+          p: currentState.p + value
+        };
+      },
+      () => {
+        this.fetchArticles();
+      }
+    );
   };
 }

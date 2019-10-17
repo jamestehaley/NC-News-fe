@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
+import Voter from "./Voter";
+import { Link } from "@reach/router";
 
 import { navigate } from "@reach/router";
 import CommentsList from "./CommentsList";
@@ -14,22 +16,29 @@ export default class Article extends Component {
       created_at,
       title,
       topic,
-      votes
+      votes,
+      article_id
     } = this.state.article;
     return (
       <article className="article">
         <h2 className="cardTitle">{title}</h2>
         <p className="cardTopic">{topic}</p>
-        <p className="cardAuthor">{`By ${author}`}</p>
+        <Link
+          to={`/users/${author}`}
+          className="cardAuthor"
+        >{`By ${author}`}</Link>
         <time className="cardPublished">{`Published: ${new Date(created_at)
           .toUTCString()
           .slice(0, -13)}`}</time>
         <p className="cardBody">{body}</p>
-        <p className="cardVotes">{`Votes: ${votes}`}</p>
+        <div className="cardVotes">
+          {Object.keys(this.state.article).length > 0 && (
+            <Voter votes={votes} type="articles" id={article_id} />
+          )}
+        </div>
         <p className="cardComments">{`Comments: ${comment_count}`}</p>
-        {Object.keys(this.state.article).length > 0 && (
-          <CommentsList user={this.props.user} uri={this.props.uri} />
-        )}
+
+        <CommentsList user={this.props.user} uri={this.props.uri} />
       </article>
     );
   }

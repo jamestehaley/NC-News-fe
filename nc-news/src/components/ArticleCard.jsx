@@ -12,7 +12,7 @@ export default function ArticleCard({ article }) {
       )
         .toUTCString()
         .slice(0, -13)}`}</time>
-      <p className="cardVotes">{`Votes: ${article.votes}`}</p>
+      <div className="cardVotes">Votes: {article.votes}</div>
       <p className="cardComments">{`Comments: ${article.comment_count}`}</p>
     </Link>
   );

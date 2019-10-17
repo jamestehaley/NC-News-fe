@@ -9,9 +9,9 @@ exports.getAllTopics = async () => {
   return data.topics;
 };
 
-exports.getArticles = async (topic, sort_by, order) => {
+exports.getArticles = async (topic, sort_by, order, author, p) => {
   const { data } = await request.get("/articles", {
-    params: { topic, sort_by, order }
+    params: { topic, sort_by, order, author, p }
   });
   return data;
 };
@@ -20,13 +20,16 @@ exports.getArticle = async uri => {
   const { data } = await request.get(uri);
   return data.article;
 };
-exports.getComments = async uri => {
-  const { data } = await request.get(`${uri}/comments`);
+exports.getComments = async (uri, p) => {
+  const { data } = await request.get(`${uri}/comments`, { params: { p } });
   return data.comments;
 };
 exports.PostComment = async (body, username, uri) => {
   await request.post(`${uri}/comments`, { username, body });
 };
-exports.deleteComment = async id => {
-  await request.delete(`/comments/${id}`);
+exports.delete = async (id, type) => {
+  await request.delete(`/${type}/${id}`);
+};
+exports.incVotes = async (type, id, inc_votes) => {
+  await request.patch(`/${type}/${id}`, { inc_votes });
 };

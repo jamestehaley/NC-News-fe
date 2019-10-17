@@ -14,7 +14,9 @@ export default class DeleteButton extends Component {
     if (this.state.confirm === false) {
       this.setState({ confirm: true });
     } else {
-      api.deleteComment(this.props.id);
+      api.delete(this.props.id, "comments").catch(() => {
+        this.props.optimisticDelete();
+      });
       this.props.optimisticDelete();
     }
   };

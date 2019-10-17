@@ -9,17 +9,21 @@ export default class CommentForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+        <p>Post a comment!</p>
         <input
           onChange={this.handleChange}
           value={this.state.comment}
           type="text"
         />
+        <p>Characters left:{140 - this.state.comment.length}</p>
         <button>Post</button>
       </form>
     );
   }
   handleChange = event => {
-    this.setState({ comment: event.target.value });
+    if (event.target.value.length < 141) {
+      this.setState({ comment: event.target.value });
+    }
   };
   handleSubmit = event => {
     event.preventDefault();

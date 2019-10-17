@@ -2,12 +2,19 @@ import React, { Component } from "react";
 import CommentCard from "./CommentCard";
 import * as api from "../utils/api";
 import CommentForm from "./CommentForm";
+import Pagination from "./Pagination";
 
 export default class CommentsList extends Component {
-  state = { comments: [] };
+  state = { comments: [], p: 0 };
   render() {
     return (
       <div className="comments">
+        <h3>Comments</h3>
+        <Pagination
+          p={this.state.p}
+          changePage={this.changePage}
+          total={Math.floor(this.state.comments.length / 10)}
+        />
         <CommentForm
           user={this.props.user}
           uri={this.props.uri}
@@ -22,24 +29,45 @@ export default class CommentsList extends Component {
             />
           );
         })}
+        <Pagination
+          p={this.state.p}
+          changePage={this.changePage}
+          total={Math.floor(this.state.comments.length / 10)}
+        />
       </div>
     );
   }
   componentDidMount() {
-    api.getComments(this.props.uri).then(comments => {
+    this.fetchComments();
+  }
+  fetchComments = () => {
+    api.getComments(this.props.uri, this.state.p).then(comments => {
       this.setState({ comments });
     });
-  }
+  };
   addComment = body => {
     console.log(this.props.user);
     const object = {
       body,
       author: this.props.user,
       created_at: Date.now(),
-      comment_id: Date.now()
+      comment_id: Date.now(),
+      votes: 0
     };
     this.setState(currentState => {
       return { comments: [object, ...currentState.comments] };
     });
+  };
+  changePage = value => {
+    this.setState(
+      currentState => {
+        return {
+          p: currentState.p + value
+        };
+      },
+      () => {
+        this.fetchComments();
+      }
+    );
   };
 }

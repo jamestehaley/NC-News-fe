@@ -3,7 +3,6 @@ import { Router } from "@reach/router";
 import "./App.css";
 import HeadBar from "./components/HeadBar";
 import TopicBar from "./components/TopicBar";
-import Footer from "./components/Footer";
 import Articles from "./components/Articles";
 import Article from "./components/Article";
 import * as api from "./utils/api";
@@ -13,27 +12,37 @@ import Errors from "./components/Errors";
 export default class App extends Component {
   state = {
     topics: [],
-    selected: "",
+    description: "",
     user: "jessjelly"
   };
   render() {
     return (
-      <div className="App">
-        <HeadBar title={this.state.selected} user={this.state.user} />
-        <TopicBar
-          topics={this.state.topics}
-          selectTopic={this.selectTopic}
-          resetTopic={this.resetTopic}
-        />
-        <Router className="main">
-          <Errors default />
-          <Articles path="/" />
-          <Articles path="/topics/:topic" />
-          <Article user={this.state.user} path="/articles/:article_id" />
-        </Router>
-
-        <Footer />
-      </div>
+      <>
+        <div className="App">
+          <Router className="header">
+            <HeadBar user={this.state.user} default />
+            <HeadBar
+              title={this.state.description}
+              user={this.state.user}
+              path="/topics/:topic"
+            />
+            <HeadBar user={this.state.user} path="/users/:author" />
+            <HeadBar user={this.state.user} path="/articles/:id" />
+          </Router>
+          <TopicBar
+            topics={this.state.topics}
+            handleSelect={this.handleSelect}
+            resetTopic={this.resetTopic}
+          />
+          <Router className="main">
+            <Errors default />
+            <Articles path="/" />
+            <Articles path="/topics/:topic" />
+            <Articles path="/users/:author" />
+            <Article user={this.state.user} path="/articles/:article_id" />
+          </Router>
+        </div>
+      </>
     );
   }
   componentDidMount = () => {
@@ -41,31 +50,24 @@ export default class App extends Component {
   };
   getTopics = () => {
     api.getAllTopics().then(topics => {
-      this.setState({ topics });
-      this.selectTopic();
+      this.setState({ topics }, () => {
+        if (/\/topics\//.test(window.location.pathname)) {
+          this.selectTopic(window.location.pathname.slice(8));
+        }
+      });
     });
   };
-  selectTopic = event => {
-    let selected = "";
-    if (!event) {
-      selected = window.location.pathname.slice(8);
-    } else {
-      selected = event.target.text.toLowerCase();
-    }
-    if (selected.length === 0) {
-      this.setState({ selected: "All Stories" });
-    } else {
-      const description = this.state.topics.find(topic => {
-        return topic.slug === selected;
-      });
-      if (description) {
-        this.setState({ selected: description.description });
-      } else {
-        this.setState({ selected: "All Stories" });
-      }
-    }
+  handleSelect = event => {
+    const topic = event.target.text.toLowerCase();
+
+    this.selectTopic(topic);
   };
-  resetTopic = () => {
-    this.setState({ selected: "All Stories" });
+  selectTopic = topic => {
+    const description = this.state.topics.find(item => {
+      return item.slug === topic;
+    });
+    if (description) {
+      this.setState({ description: description.description });
+    }
   };
 }
