@@ -1,39 +1,43 @@
-import React, { Component } from "react";
-import * as api from "../utils/api";
-import ArticleCard from "./ArticleCard";
-import Pagination from "./Pagination";
+import React, { Component } from 'react';
+import * as api from '../utils/api';
+import ArticleCard from './ArticleCard';
+import Pagination from './Pagination';
+import { navigate } from '@reach/router';
 
 export default class Articles extends Component {
   state = {
     articles: [],
     article_count: 0,
-    sort_by: "created_at",
-    order: "desc",
+    sort_by: 'created_at',
+    order: 'desc',
     p: 0
   };
   render() {
     return (
       <main>
-        <p>
-          Total {this.props.topic && `${this.props.topic} `}Articles:{" "}
-          {this.state.article_count}
-        </p>
+        <section>
+          <p>
+            Total {this.props.topic && `${this.props.topic} `}Articles:{' '}
+            {this.state.article_count}
+          </p>
 
-        <span>Sort by: </span>
+          <span>Sort by: </span>
 
-        <select onChange={this.changeSort}>
-          <option value="newest">Newest</option>
-          <option value="oldest">Oldest</option>
-          <option value="comments">Most comments</option>
-          <option value="votes">Most votes</option>
-        </select>
-        {this.state.article_count > 10 && (
-          <Pagination
-            p={this.state.p}
-            changePage={this.changePage}
-            total={Math.floor(this.state.article_count / 10)}
-          />
-        )}
+          <select onChange={this.changeSort}>
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+            <option value="comments">Most comments</option>
+            <option value="votes">Most votes</option>
+          </select>
+          <br />
+          {this.state.article_count > 10 && (
+            <Pagination
+              p={this.state.p}
+              changePage={this.changePage}
+              total={Math.floor(this.state.article_count / 10)}
+            />
+          )}
+        </section>
         {this.state.articles.map(article => {
           return <ArticleCard key={article.article_id} article={article} />;
         })}
@@ -48,8 +52,8 @@ export default class Articles extends Component {
     );
   }
   componentDidMount() {
-    const sort_by = JSON.parse(localStorage.getItem("sort_by"));
-    const order = JSON.parse(localStorage.getItem("order"));
+    const sort_by = JSON.parse(localStorage.getItem('sort_by'));
+    const order = JSON.parse(localStorage.getItem('order'));
     this.setState({ order, sort_by }, () => {
       this.fetchArticles();
     });
@@ -62,24 +66,24 @@ export default class Articles extends Component {
     }
   }
   componentWillUnmount() {
-    localStorage.setItem("sort_by", JSON.stringify(this.state.sort_by));
-    localStorage.setItem("order", JSON.stringify(this.state.order));
+    localStorage.setItem('sort_by', JSON.stringify(this.state.sort_by));
+    localStorage.setItem('order', JSON.stringify(this.state.order));
   }
   changeSort = event => {
     let sort_by;
     let order;
-    if (event.target.value === "comments") {
-      sort_by = "comment_count";
-      order = "desc";
-    } else if (event.target.value === "votes") {
-      sort_by = "votes";
-      order = "desc";
-    } else if (event.target.value === "oldest") {
-      sort_by = "created_at";
-      order = "asc";
-    } else if (event.target.value === "newest") {
-      sort_by = "created_at";
-      order = "desc";
+    if (event.target.value === 'comments') {
+      sort_by = 'comment_count';
+      order = 'desc';
+    } else if (event.target.value === 'votes') {
+      sort_by = 'votes';
+      order = 'desc';
+    } else if (event.target.value === 'oldest') {
+      sort_by = 'created_at';
+      order = 'asc';
+    } else if (event.target.value === 'newest') {
+      sort_by = 'created_at';
+      order = 'desc';
     }
     this.setState({ order, sort_by, p: 0 }, () => {
       this.fetchArticles();
@@ -100,7 +104,16 @@ export default class Articles extends Component {
           article_count: data.article_count
         });
       })
-      .catch(console.dir);
+      .catch(err => {
+        let msg;
+        if (err.message === 'Network Error')
+          msg = `Network error! It is likely that you have lost connection`;
+        else msg = `Unknown Error!`;
+        navigate('/Error', {
+          state: { msg },
+          replace: true
+        });
+      });
   };
   changePage = value => {
     this.setState(

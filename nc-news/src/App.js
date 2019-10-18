@@ -1,19 +1,19 @@
-import { Router } from "@reach/router";
+import { Router, navigate } from '@reach/router';
 
-import "./App.css";
-import HeadBar from "./components/HeadBar";
-import TopicBar from "./components/TopicBar";
-import Articles from "./components/Articles";
-import Article from "./components/Article";
-import * as api from "./utils/api";
-import React, { Component } from "react";
-import Errors from "./components/Errors";
+import './App.css';
+import HeadBar from './components/HeadBar';
+import TopicBar from './components/TopicBar';
+import Articles from './components/Articles';
+import Article from './components/Article';
+import * as api from './utils/api';
+import React, { Component } from 'react';
+import Errors from './components/Errors';
 
 export default class App extends Component {
   state = {
     topics: [],
-    description: "",
-    user: "jessjelly"
+    description: '',
+    user: 'jessjelly'
   };
   render() {
     return (
@@ -49,16 +49,28 @@ export default class App extends Component {
     this.getTopics();
   };
   getTopics = () => {
-    api.getAllTopics().then(topics => {
-      this.setState({ topics }, () => {
-        if (/\/topics\//.test(window.location.pathname)) {
-          this.selectTopic(window.location.pathname.slice(8));
-        }
+    api
+      .getAllTopics()
+      .then(topics => {
+        this.setState({ topics }, () => {
+          if (/\/topics\//.test(window.location.pathname)) {
+            this.selectTopic(window.location.pathname.slice(8));
+          }
+        });
+      })
+      .catch(err => {
+        let msg;
+        if (err.message === 'Network Error')
+          msg = `Network error! It is likely that you have lost connection`;
+        else msg = `Unknown Error!`;
+        navigate('/Error', {
+          state: { msg },
+          replace: true
+        });
       });
-    });
   };
   handleSelect = event => {
-    const topic = event.target.text.toLowerCase();
+    const topic = event.target.innerText.toLowerCase();
 
     this.selectTopic(topic);
   };

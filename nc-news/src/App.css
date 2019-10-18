@@ -1,11 +1,12 @@
 @font-face {
-  font-family: GothamBook;
-  src: url("/fonts/gothambook-webfont.woff") format("woff"),
-    url("/fonts/gothambook-webfont.woff2") format("woff2")
-      url("/fonts/gothambook-webfont.ttf") format("truetype");
+  font-family: 'Gotham Book';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Gotham Book'), url('GOTHAMBOOK.woff') format('woff');
 }
 .App {
-  font-family: GothamBook;
+  margin: 0;
+  font-family: Gotham Book;
   text-align: center;
   height: 100vh;
   color: #0b0c0c;
@@ -14,8 +15,8 @@
   grid-template-columns: 0fr 10fr;
   grid-template-rows: 1fr 13fr;
   grid-template-areas:
-    "header header"
-    "topic  main";
+    'header header'
+    'topic  main';
 }
 /*ba1f31 salmon*/
 /*EDEDED light grey */
@@ -23,19 +24,19 @@
 
 .header {
   grid-area: header;
-  color: red;
+  background-color: #202829;
+  color: white;
   display: grid;
   grid-template-columns: 3fr 1fr 1fr;
-  border: solid 2px green;
 }
 .topic {
   grid-area: topic;
-  border: solid 2px red;
+  border: solid 2px #ba1f31;
   overflow-y: scroll;
 }
 .main {
   grid-area: main;
-  border: solid 2px yellow;
+
   overflow-y: scroll;
 }
 .articleCard {
@@ -43,9 +44,9 @@
   grid-template-columns: 2fr 2fr 1fr;
   grid-template-rows: 2fr 1fr 1fr;
   grid-template-areas:
-    "cardTitle cardTitle cardTopic"
-    "cardAuthor cardPublished ."
-    "cardVotes . cardComments";
+    'cardTitle cardTitle cardTopic'
+    'cardAuthor cardPublished .'
+    'cardVotes . cardComments';
   border: solid 2px purple;
   text-decoration: none;
   color: black;
@@ -55,11 +56,11 @@
   grid-template-columns: 2fr 2fr 1fr 1fr;
   grid-template-rows: 2fr 1fr 6fr 1fr auto;
   grid-template-areas:
-    "cardTitle cardTitle cardTitle"
-    "cardAuthor cardPublished cardTopic"
-    "cardBody cardBody cardBody"
-    "cardVotes . cardComments"
-    "comments comments comments";
+    'cardTitle cardTitle cardTitle'
+    'cardAuthor cardPublished cardTopic'
+    'cardBody cardBody cardBody'
+    'cardVotes . cardComments'
+    'comments comments comments';
   border: solid 2px purple;
   text-decoration: none;
   color: black;
@@ -104,7 +105,7 @@ li {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 2fr 1fr;
-  grid-template-areas: "cardAuthor cardPublished" "cardBody cardBody" "delete cardVotes";
+  grid-template-areas: 'cardAuthor cardPublished' 'cardBody cardBody' 'delete cardVotes';
 }
 .delete {
   grid-area: delete;
@@ -159,8 +160,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* General sidebar styles */
 .bm-menu {
-  background: #373a47;
-
+  background: #202829;
   font-size: 1.15em;
 }
 
@@ -177,7 +177,6 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* Individual item */
 .bm-item {
   display: inline-block;
-  color: white;
 }
 
 /* Styling of overlay */
@@ -185,7 +184,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   background: rgba(0, 0, 0, 0.3);
 }
 :visited {
-  color: black;
+  color: white;
 }
 @media only screen and (max-width: 600px) {
 }

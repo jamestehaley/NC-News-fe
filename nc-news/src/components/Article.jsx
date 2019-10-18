@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import * as api from "../utils/api";
-import Voter from "./Voter";
-import { Link } from "@reach/router";
+import React, { Component } from 'react';
+import * as api from '../utils/api';
+import Voter from './Voter';
+import { Link } from '@reach/router';
 
-import { navigate } from "@reach/router";
-import CommentsList from "./CommentsList";
+import { navigate } from '@reach/router';
+import CommentsList from './CommentsList';
 
 export default class Article extends Component {
   state = { article: {} };
@@ -49,8 +49,14 @@ export default class Article extends Component {
         this.setState({ article });
       })
       .catch(err => {
-        navigate("/Error", {
-          state: { msg: `Article ${this.props.article_id} not found!` },
+        let msg;
+        if (err.message === 'Network Error')
+          msg = `Network error! It is likely that you have lost connection`;
+        else if (!/d+/.test(this.props.article_id)) {
+          msg = `Articles must have numerical IDs, "${this.props.article_id}" is not a valid ID!`;
+        } else msg = `Article ${this.props.article_id} not found!`;
+        navigate('/Error', {
+          state: { msg },
           replace: true
         });
       });
