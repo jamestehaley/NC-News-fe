@@ -147,14 +147,18 @@ button {
   color: white;
   font-weight: 500;
   padding: 10px;
+  align-self: start;
+}
+.articleCard .cardTitle {
   position: relative;
   top: -18px;
-  align-self: start;
 }
 .cardTopic {
   grid-area: cardTopic;
   align-self: center;
   justify-self: center;
+}
+.articleCard .cardTopic {
   position: relative;
   top: -18px;
 }
@@ -163,29 +167,39 @@ button {
   align-self: center;
   justify-self: start;
   text-align: left;
+  width: 50vw;
+}
+.articleCard .cardAuthor {
   position: relative;
   top: -35px;
-  width: 50vw;
 }
 .cardPublished {
   grid-area: cardPublished;
+
+  text-align: left;
+}
+.articleCard .cardPublished {
   position: relative;
   top: -35px;
-  text-align: left;
 }
 .cardVotes {
   grid-area: cardVotes;
+}
+.articleCard .cardVotes {
   position: relative;
   top: -35px;
   right: 20px;
 }
 .cardComments {
   grid-area: cardComments;
+}
+.articleCard .cardComments {
   position: relative;
   top: -72px;
 }
 .cardBody {
   grid-area: cardBody;
+  text-align: start;
 }
 li {
   list-style: none;
@@ -283,4 +297,13 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 .even {
   background-color: #ffffff;
+}
+.textbox {
+  width: 90%;
+  resize: none;
+  overflow-wrap: break-word;
+  text-align: left;
+  justify-content: start;
+  align-content: start;
+  padding-bottom: 100px;
 }

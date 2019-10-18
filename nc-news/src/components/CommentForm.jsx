@@ -1,16 +1,17 @@
-import React, { Component } from "react";
-import * as api from "../utils/api";
-import { navigate } from "@reach/router";
+import React, { Component } from 'react';
+import * as api from '../utils/api';
+import { navigate } from '@reach/router';
 
 export default class CommentForm extends Component {
   state = {
-    comment: ""
+    comment: ''
   };
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <p>Post a comment!</p>
         <input
+          className="textbox"
           onChange={this.handleChange}
           value={this.state.comment}
           type="text"
@@ -31,7 +32,7 @@ export default class CommentForm extends Component {
       api
         .PostComment(this.state.comment, this.props.user, this.props.uri)
         .catch(err => {
-          navigate("/Error", {
+          navigate('/Error', {
             state: {
               msg: `The article you were commenting on no longer exists!`
             },
@@ -39,7 +40,7 @@ export default class CommentForm extends Component {
           });
         });
       this.props.addComment(this.state.comment, this.props.user);
-      this.setState({ comment: "" });
+      this.setState({ comment: '' });
     }
   };
 }

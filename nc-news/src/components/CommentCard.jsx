@@ -38,7 +38,7 @@ export default class CommentCard extends Component {
             </div>
           </>
         )}
-        {this.state.deleted && <h1>DELETED!</h1>}
+        {this.state.deleted && <h1 className="commentBody">DELETED!</h1>}
       </section>
     );
   }
