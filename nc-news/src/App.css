@@ -18,38 +18,93 @@
     'header header'
     'topic  main';
 }
+button {
+  background-color: inherit;
+  border: none;
+  font-weight: 600;
+  font-family: Gotham Book;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 /*ba1f31 salmon*/
 /*EDEDED light grey */
 /*202829 dark grey */
-
+.salmon {
+  margin-top: -16px;
+  background-color: #ba1f31;
+  color: #ffffff;
+  align-self: flex-start;
+}
+.pressed {
+  color: #ba1f31;
+}
+.salmon .pressed {
+  color: white;
+}
 .header {
   grid-area: header;
   background-color: #202829;
   color: white;
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr;
+  grid-template-columns: 30px 3fr 2fr;
+  grid-template-rows: auto auto;
+  grid-template-areas: '. title login' '. title NCNEWS';
+}
+.title {
+  grid-area: title;
+  font-size: 110%;
+  justify-self: center;
+  align-self: center;
+}
+.login {
+  grid-area: login;
+  height: 40px;
+  width: 100px;
+  justify-self: right;
+}
+.NCNEWS {
+  grid-area: NCNEWS;
+  height: 10px;
+}
+.header button {
+  color: white;
+  font-weight: 500;
+  border: solid 2px #2a3233;
+  align-self: center;
 }
 .topic {
   grid-area: topic;
-  border: solid 2px #ba1f31;
   overflow-y: scroll;
 }
+.topic ul {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.topic ul li {
+  padding-top: 20px;
+}
+.topic ul li a {
+  text-decoration-line: none;
+  color: #ba1f31;
+  font-weight: 600;
+}
 .main {
-  grid-area: main;
-
+  margin: 0;
+  padding: 0;
   overflow-y: scroll;
 }
 .articleCard {
   display: grid;
-  grid-template-columns: 2fr 2fr 1fr;
-  grid-template-rows: 2fr 1fr 1fr;
+  grid-template-columns: 3fr 3fr 1fr;
   grid-template-areas:
     'cardTitle cardTitle cardTopic'
-    'cardAuthor cardPublished .'
+    'cardAuthor cardPublished cardPublished'
     'cardVotes . cardComments';
-  border: solid 2px purple;
   text-decoration: none;
   color: black;
+  justify-items: left;
+  align-items: flex-start;
 }
 .article {
   display: grid;
@@ -59,7 +114,7 @@
     'cardTitle cardTitle cardTitle'
     'cardAuthor cardPublished cardTopic'
     'cardBody cardBody cardBody'
-    'cardVotes . cardComments'
+    'cardVotes delete cardComments'
     'comments comments comments';
   border: solid 2px purple;
   text-decoration: none;
@@ -113,24 +168,27 @@ li {
 }
 
 .rotate {
+  width: 45px;
+  position: relative;
+  right: 25px;
   transform: rotate(90deg);
 }
 .voter {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 80px 60px;
 }
 
 .bm-burger-button {
   position: fixed;
   width: 20px;
   height: 20px;
-  left: 20px;
-  top: 20px;
+  left: 10px;
+  top: 10px;
 }
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: #373a47;
+  background: #ba1f31;
 }
 
 /* Color/shape of burger icon bars on hover*/
@@ -140,13 +198,16 @@ li {
 
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
+  position: absolute;
+
+  left: 80%;
   height: 24px;
   width: 24px;
 }
 
 /* Color/shape of close button cross */
 .bm-cross {
-  background: #bdc3c7;
+  background: #ededed;
 }
 
 /*
@@ -166,12 +227,12 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-  fill: #373a47;
+  fill: #202829;
 }
 
 /* Wrapper for item list */
 .bm-item-list {
-  color: #b8b7ad;
+  color: #ededed;
 }
 
 /* Individual item */
@@ -183,8 +244,11 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
 }
-:visited {
-  color: white;
-}
 @media only screen and (max-width: 600px) {
+}
+.odd {
+  background-color: lightgrey;
+}
+.even {
+  background-color: #ffffff;
 }

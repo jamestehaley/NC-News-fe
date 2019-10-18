@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import CommentCard from "./CommentCard";
-import * as api from "../utils/api";
-import CommentForm from "./CommentForm";
-import Pagination from "./Pagination";
+import React, { Component } from 'react';
+import CommentCard from './CommentCard';
+import * as api from '../utils/api';
+import CommentForm from './CommentForm';
+import Pagination from './Pagination';
 
 export default class CommentsList extends Component {
   state = { comments: [], p: 0 };
@@ -10,11 +10,13 @@ export default class CommentsList extends Component {
     return (
       <div className="comments">
         <h3>Comments</h3>
-        <Pagination
-          p={this.state.p}
-          changePage={this.changePage}
-          total={Math.floor(this.state.comments.length / 10)}
-        />
+        {this.state.comments.length > 10 && (
+          <Pagination
+            p={this.state.p}
+            changePage={this.changePage}
+            total={Math.floor(this.state.comments.length / 10)}
+          />
+        )}
         <CommentForm
           user={this.props.user}
           uri={this.props.uri}
@@ -29,11 +31,13 @@ export default class CommentsList extends Component {
             />
           );
         })}
-        <Pagination
-          p={this.state.p}
-          changePage={this.changePage}
-          total={Math.floor(this.state.comments.length / 10)}
-        />
+        {this.state.comments.length > 10 && (
+          <Pagination
+            p={this.state.p}
+            changePage={this.changePage}
+            total={Math.floor(this.state.comments.length / 10)}
+          />
+        )}
       </div>
     );
   }

@@ -13,16 +13,15 @@ export default class Articles extends Component {
     p: 0
   };
   render() {
+    console.log(this.props.user);
     return (
       <main>
-        <section>
+        <section className="salmon">
           <p>
-            Total {this.props.topic && `${this.props.topic} `}Articles:{' '}
+            Total {this.props.topic && `${this.props.topic} `}articles:{' '}
             {this.state.article_count}
           </p>
-
           <span>Sort by: </span>
-
           <select onChange={this.changeSort}>
             <option value="newest">Newest</option>
             <option value="oldest">Oldest</option>
@@ -38,8 +37,14 @@ export default class Articles extends Component {
             />
           )}
         </section>
-        {this.state.articles.map(article => {
-          return <ArticleCard key={article.article_id} article={article} />;
+        {this.state.articles.map((article, index) => {
+          return (
+            <ArticleCard
+              status={index % 2 === 0 ? 'odd' : 'even'}
+              key={article.article_id}
+              article={article}
+            />
+          );
         })}
         {this.state.article_count > 10 && (
           <Pagination

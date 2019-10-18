@@ -35,10 +35,10 @@ export default class App extends Component {
             resetTopic={this.resetTopic}
           />
           <Router className="main">
-            <Errors default />
-            <Articles path="/" />
-            <Articles path="/topics/:topic" />
-            <Articles path="/users/:author" />
+            <Errors user={this.state.user} default />
+            <Articles user={this.state.user} path="/" />
+            <Articles user={this.state.user} path="/topics/:topic" />
+            <Articles user={this.state.user} path="/users/:author" />
             <Article user={this.state.user} path="/articles/:article_id" />
           </Router>
         </div>

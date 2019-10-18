@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
 export default function HeadBar({ path, author, title, user }) {
-  if (!path) title = "All Stories";
+  if (!path) title = 'All Stories';
   return (
     <>
-      <h2>{title || author}</h2>
-      <button>{user}</button>
-      <h2>NC NEWS</h2>
+      <h2 className="title">{title || author}</h2>
+      <button className="login">Logged in as: {user}</button>
+      <h2 className="NCNEWS">NC NEWS</h2>
     </>
   );
 }
