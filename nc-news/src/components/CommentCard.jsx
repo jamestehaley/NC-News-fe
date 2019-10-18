@@ -7,9 +7,9 @@ import { Link } from '@reach/router';
 export default class CommentCard extends Component {
   state = { deleted: false };
   render() {
-    const { comment, user } = this.props;
+    const { comment, user, status } = this.props;
     return (
-      <section className="commentCard">
+      <section className={`commentCard ${status}`}>
         {!this.state.deleted && (
           <>
             <Link

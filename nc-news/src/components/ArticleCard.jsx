@@ -7,9 +7,9 @@ export default function ArticleCard({ article, status }) {
       to={`/articles/${article.article_id}`}
       className={`articleCard ${status}`}
     >
+      <p className="cardAuthor">{`By ${article.author}`}</p>
       <h3 className="cardTitle">{article.title}</h3>
       <p className="cardTopic">{article.topic}</p>
-      <p className="cardAuthor">{`By ${article.author}`}</p>
       <time className="cardPublished">{`Published: ${new Date(
         article.created_at
       )

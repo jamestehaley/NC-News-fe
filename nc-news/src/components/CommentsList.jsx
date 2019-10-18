@@ -22,9 +22,10 @@ export default class CommentsList extends Component {
           uri={this.props.uri}
           addComment={this.addComment}
         />
-        {this.state.comments.map(comment => {
+        {this.state.comments.map((comment, index) => {
           return (
             <CommentCard
+              status={index % 2 === 0 ? 'odd' : 'even'}
               key={comment.comment_id}
               comment={comment}
               user={this.props.user}
