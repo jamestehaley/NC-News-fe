@@ -13,7 +13,6 @@ export default class Articles extends Component {
     p: 0
   };
   render() {
-    console.log(this.props.user);
     return (
       <main>
         <section className="salmon">

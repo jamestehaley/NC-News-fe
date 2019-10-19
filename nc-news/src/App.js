@@ -8,12 +8,13 @@ import Article from './components/Article';
 import * as api from './utils/api';
 import React, { Component } from 'react';
 import Errors from './components/Errors';
+import Users from './components/Users';
 
 export default class App extends Component {
   state = {
     topics: [],
     description: '',
-    user: 'jessjelly'
+    user: ''
   };
   render() {
     return (
@@ -40,12 +41,15 @@ export default class App extends Component {
             <Articles user={this.state.user} path="/topics/:topic" />
             <Articles user={this.state.user} path="/users/:author" />
             <Article user={this.state.user} path="/articles/:article_id" />
+            <Users path="/users" handleProfileClick={this.handleProfileClick} />
           </Router>
         </div>
       </>
     );
   }
   componentDidMount = () => {
+    const user = JSON.parse(localStorage.getItem('user')) || '';
+    this.setState({ user });
     this.getTopics();
   };
   getTopics = () => {
@@ -81,5 +85,9 @@ export default class App extends Component {
     if (description) {
       this.setState({ description: description.description });
     }
+  };
+  handleProfileClick = user => {
+    this.setState({ user });
+    localStorage.setItem('user', JSON.stringify(user));
   };
 }

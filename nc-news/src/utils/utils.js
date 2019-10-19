@@ -34,11 +34,12 @@ exports.secondsToTimeString = seconds => {
 };
 exports.shortenNumbers = num => {
   const arr = String(num).split('');
+
   if (arr.length > 6) {
-    return `${arr.slice(-6).join('')}M`;
+    return `${arr.slice(0, -6).join('')}M`;
   }
   if (arr.length > 3) {
-    return `${arr.slice(-3).join('')}K`;
+    return `${arr.slice(0, -3).join('')}K`;
   }
-  return num;
+  return String(num);
 };

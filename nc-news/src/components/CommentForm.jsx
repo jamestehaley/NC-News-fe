@@ -30,7 +30,7 @@ export default class CommentForm extends Component {
     event.preventDefault();
     if (this.state.comment.length > 0) {
       api
-        .PostComment(this.state.comment, this.props.user, this.props.uri)
+        .postComment(this.state.comment, this.props.user, this.props.uri)
         .catch(err => {
           navigate('/Error', {
             state: {

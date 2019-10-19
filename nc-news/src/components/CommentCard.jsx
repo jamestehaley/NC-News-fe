@@ -23,12 +23,13 @@ export default class CommentCard extends Component {
               )}{' '}
               ago
             </p>
-            {user === comment.author && (
-              <DeleteButton
-                optimisticDelete={this.optimisticDelete}
-                id={comment.comment_id}
-              />
-            )}
+            {user === comment.author ||
+              (user === 'administrator' && (
+                <DeleteButton
+                  optimisticDelete={this.optimisticDelete}
+                  id={comment.comment_id}
+                />
+              ))}
             <div className="cardVotes">
               <Voter
                 votes={comment.votes}

@@ -5,7 +5,7 @@ export default class DeleteButton extends Component {
   state = { confirm: false };
   render() {
     return (
-      <button onClick={this.handleClick}>
+      <button className="delete" onClick={this.handleClick}>
         {this.state.confirm ? 'Confirm deletion' : `Delete`}
       </button>
     );

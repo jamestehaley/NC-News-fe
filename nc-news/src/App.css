@@ -30,6 +30,7 @@ button {
 /*EDEDED light grey */
 /*202829 dark grey */
 .salmon {
+  padding: 4px;
   margin-top: -16px;
   background-color: #ba1f31;
   color: #ffffff;
@@ -214,6 +215,9 @@ li {
 }
 .delete {
   grid-area: delete;
+  background-color: #ba1f31;
+  height: 25px;
+  width: 140px;
 }
 
 .rotate {
@@ -312,4 +316,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 .Error {
   padding-top: 25%;
+}
+.profilePic {
+  height: 100px;
+  width: 100px;
 }
