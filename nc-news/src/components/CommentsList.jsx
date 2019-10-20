@@ -10,18 +10,19 @@ export default class CommentsList extends Component {
     return (
       <div className="comments">
         <h3>Comments</h3>
-        {this.state.comments.length > 10 && (
+
+        <CommentForm
+          user={this.props.user}
+          uri={this.props.uri}
+          addComment={this.addComment}
+        />
+        {this.props.comment_count > 10 && (
           <Pagination
             p={this.state.p}
             changePage={this.changePage}
             total={Math.floor(this.state.comments.length / 10)}
           />
         )}
-        <CommentForm
-          user={this.props.user}
-          uri={this.props.uri}
-          addComment={this.addComment}
-        />
         {this.state.comments.map((comment, index) => {
           return (
             <CommentCard
@@ -32,7 +33,7 @@ export default class CommentsList extends Component {
             />
           );
         })}
-        {this.state.comments.length > 10 && (
+        {this.props.comment_count > 10 && (
           <Pagination
             p={this.state.p}
             changePage={this.changePage}

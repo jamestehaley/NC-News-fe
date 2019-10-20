@@ -17,7 +17,7 @@ export default class CommentForm extends Component {
           type="text"
         />
         <p>Characters left:{140 - this.state.comment.length}</p>
-        <button>Post</button>
+        <button className="post">Post</button>
       </form>
     );
   }

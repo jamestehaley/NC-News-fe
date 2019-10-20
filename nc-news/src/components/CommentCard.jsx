@@ -12,24 +12,19 @@ export default class CommentCard extends Component {
       <section className={`commentCard ${status}`}>
         {!this.state.deleted && (
           <>
-            <Link
-              to={`/users/${comment.author}`}
-              className="cardAuthor"
-            >{`By ${comment.author}`}</Link>
-            <p className="cardBody">{comment.body}</p>
+            <div className="cardAuthor">
+              <Link
+                to={`/users/${comment.author}`}
+              >{`By ${comment.author}`}</Link>
+            </div>
             <p className="cardPublished">
               {secondsToTimeString(
                 Math.floor((Date.now() - Date.parse(comment.created_at)) / 1000)
               )}{' '}
               ago
             </p>
-            {user === comment.author ||
-              (user === 'administrator' && (
-                <DeleteButton
-                  optimisticDelete={this.optimisticDelete}
-                  id={comment.comment_id}
-                />
-              ))}
+            <p className="cardBody">{comment.body}</p>
+
             <div className="cardVotes">
               <Voter
                 votes={comment.votes}
@@ -37,6 +32,12 @@ export default class CommentCard extends Component {
                 id={comment.comment_id}
               />
             </div>
+            {(user === comment.author || user === 'administrator') && (
+              <DeleteButton
+                optimisticDelete={this.optimisticDelete}
+                id={comment.comment_id}
+              />
+            )}
           </>
         )}
         {this.state.deleted && <h1 className="commentBody">DELETED!</h1>}

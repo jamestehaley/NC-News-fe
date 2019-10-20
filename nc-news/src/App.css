@@ -127,6 +127,9 @@ button {
   margin: 0;
 }
 .article {
+  overflow-y: scroll;
+  padding: 20px;
+  position: relative;
   display: grid;
   grid-template-columns: 2fr 2fr 1fr;
   grid-template-areas:
@@ -149,6 +152,8 @@ button {
   font-weight: 500;
   padding: 10px;
   align-self: start;
+  justify-self: center;
+  width: 90%;
 }
 .articleCard .cardTitle {
   position: relative;
@@ -161,7 +166,7 @@ button {
 }
 .articleCard .cardTopic {
   position: relative;
-  top: -18px;
+  top: -15%;
 }
 .cardAuthor {
   grid-area: cardAuthor;
@@ -172,7 +177,8 @@ button {
 }
 .articleCard .cardAuthor {
   position: relative;
-  top: -35px;
+  top: -30px;
+  left: 6%;
 }
 .cardPublished {
   grid-area: cardPublished;
@@ -181,22 +187,26 @@ button {
 }
 .articleCard .cardPublished {
   position: relative;
-  top: -35px;
+  top: -30px;
+  left: 4%;
 }
 .cardVotes {
   grid-area: cardVotes;
+  position: relative;
+  left: -5px;
+  top: -10px;
 }
 .articleCard .cardVotes {
   position: relative;
-  top: -35px;
-  right: 20px;
+  top: -30px;
+  left: -10px;
 }
 .cardComments {
   grid-area: cardComments;
 }
 .articleCard .cardComments {
   position: relative;
-  top: -72px;
+  top: -66px;
 }
 .article .cardComments {
   width: 40vw;
@@ -207,11 +217,6 @@ button {
 }
 li {
   list-style: none;
-}
-.commentCard {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas: 'cardAuthor cardPublished' 'cardBody cardBody' 'delete cardVotes';
 }
 .delete {
   grid-area: delete;
@@ -306,6 +311,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   background-color: #ffffff;
 }
 .textbox {
+  margin-top: 20px;
   width: 90%;
   resize: none;
   overflow-wrap: break-word;
@@ -320,4 +326,27 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .profilePic {
   height: 100px;
   width: 100px;
+}
+.article a {
+  font-weight: 800;
+}
+
+.commentCard {
+  padding: 20px;
+  position: relative;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.commentCard .cardPublished {
+  position: relative;
+  justify-self: start;
+}
+.article .delete {
+  background-color: #ba1f31;
+}
+.post {
+  background-color: #ba1f31;
+  height: 30px;
+  width: 80px;
+  margin-bottom: 20px;
 }

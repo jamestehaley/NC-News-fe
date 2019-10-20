@@ -38,18 +38,23 @@ export default class Article extends Component {
                 <Voter votes={votes} type="articles" id={article_id} />
               )}
             </div>
-            {this.props.user === author ||
-              (this.props.user === 'administrator' && (
-                <div className="delete">
-                  <DeleteButton
-                    optimisticDelete={this.optimisticDelete}
-                    id={article_id}
-                  />
-                </div>
-              ))}
+            {console.log(this.props.user === author)}
+            {(this.props.user === author ||
+              this.props.user === 'administrator') && (
+              <div className="delete">
+                <DeleteButton
+                  optimisticDelete={this.optimisticDelete}
+                  id={article_id}
+                />
+              </div>
+            )}
             <p className="cardComments">{`Comments: ${comment_count}`}</p>
 
-            <CommentsList user={this.props.user} uri={this.props.uri} />
+            <CommentsList
+              comment_count={comment_count}
+              user={this.props.user}
+              uri={this.props.uri}
+            />
           </>
         )}
         {this.state.deleted && <h1>DELETED!</h1>}
