@@ -13,7 +13,7 @@
   background: #ffffff;
   display: grid;
   grid-template-columns: 0fr 10fr;
-  grid-template-rows: 100px auto;
+  grid-template-rows: 106px 1fr;
   grid-template-areas:
     'header header'
     'topic  main';
@@ -49,6 +49,7 @@ button {
   display: grid;
   grid-template-columns: 30px 3fr 2fr 2fr;
   grid-template-areas: '. title login NCNEWS';
+  height: 106px;
 }
 @media only screen and (max-width: 600px) {
   .header {
@@ -63,6 +64,12 @@ button {
   .title {
     position: relative;
     left: 10%;
+    top: 3px;
+  }
+  .login {
+    position: relative;
+    top: 37px;
+    height: 20px;
   }
 }
 .title {
@@ -73,9 +80,11 @@ button {
 }
 .login {
   grid-area: login;
-  height: 40px;
-  width: 100px;
   justify-self: right;
+  background-color: #ba1f31;
+  color: white;
+  margin: 5px;
+  padding: 5px;
 }
 .NCNEWS {
   grid-area: NCNEWS;
@@ -84,6 +93,7 @@ button {
   align-self: center;
   position: relative;
   top: -5px;
+  right: 5px;
 }
 .header button {
   color: white;
@@ -97,8 +107,6 @@ button {
 }
 .topic ul {
   height: 100%;
-  margin: 0;
-  padding: 0;
 }
 .topic ul li {
   padding-top: 20px;
@@ -346,7 +354,27 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 .post {
   background-color: #ba1f31;
-  height: 30px;
+
   width: 80px;
   margin-bottom: 20px;
+}
+.login a {
+  color: white;
+  text-decoration: none;
+}
+.userCard {
+  width: 200px;
+  height: 200px;
+}
+
+.full {
+  border: solid 1px red;
+}
+.userList h2 {
+  padding: 0;
+  margin: 0;
+}
+ul {
+  margin: 0;
+  padding: 0;
 }

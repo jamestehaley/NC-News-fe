@@ -10,7 +10,8 @@ export default class Articles extends Component {
     article_count: 0,
     sort_by: 'created_at',
     order: 'desc',
-    p: 0
+    p: 0,
+    checked: false
   };
   render() {
     return (
@@ -36,6 +37,9 @@ export default class Articles extends Component {
             />
           )}
         </section>
+        {this.state.checked && this.state.article_count === '0' && (
+          <h1>{`There are no articles about ${this.props.topic}, would you like to make one?`}</h1>
+        )}
         {this.state.articles.map((article, index) => {
           return (
             <ArticleCard
@@ -105,7 +109,8 @@ export default class Articles extends Component {
       .then(data => {
         this.setState({
           articles: data.articles,
-          article_count: data.article_count
+          article_count: data.article_count,
+          checked: true
         });
       })
       .catch(err => {

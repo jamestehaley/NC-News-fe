@@ -8,7 +8,7 @@ export default function HeadBar({ path, author, title, user }) {
       <h2 className="title">{title || author}</h2>
       <div className="login">
         <Link to="/users">
-          {user.length > 0 ? `Logged in as: ${user}` : `Not logged in`}
+          {user.length > 0 ? `Logged in as: ${user}` : `Sign in`}
         </Link>
       </div>
       <h2 className="NCNEWS">NC NEWS</h2>

@@ -9,15 +9,25 @@ export default class CommentForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <p>Post a comment!</p>
-        <input
-          className="textbox"
-          onChange={this.handleChange}
-          value={this.state.comment}
-          type="text"
-        />
-        <p>Characters left:{140 - this.state.comment.length}</p>
-        <button className="post">Post</button>
+        <p>
+          {!!this.props.user.length
+            ? 'Post a comment!'
+            : 'Please sign in to post a comment.'}
+        </p>
+        {!!this.props.user.length && (
+          <>
+            <input
+              className={`textbox ${
+                this.state.comment.length === 140 ? 'full' : ''
+              }`}
+              onChange={this.handleChange}
+              value={this.state.comment}
+              type="text"
+            />
+            <p>Characters left:{140 - this.state.comment.length}</p>
+            <button className="post">Post</button>
+          </>
+        )}
       </form>
     );
   }
@@ -28,7 +38,7 @@ export default class CommentForm extends Component {
   };
   handleSubmit = event => {
     event.preventDefault();
-    if (this.state.comment.length > 0) {
+    if (this.state.comment.length > 0 && !!this.props.user.length) {
       api
         .postComment(this.state.comment, this.props.user, this.props.uri)
         .catch(err => {

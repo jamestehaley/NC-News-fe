@@ -14,13 +14,14 @@ export default class Users extends Component {
       name: 'Administrator'
     };
     return (
-      <ul>
-        {' '}
+      <ul className="userList">
+        <h2>Select a user to control</h2>
         {!!this.state.users.length && (
           <>
-            {[admin, ...this.state.users].map(user => {
+            {[admin, ...this.state.users].map((user, index) => {
               return (
                 <UserCard
+                  status={index % 2 === 0 ? 'odd' : 'even'}
                   key={user.username}
                   user={user}
                   handleProfileClick={this.props.handleProfileClick}

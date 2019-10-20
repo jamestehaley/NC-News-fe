@@ -1,21 +1,20 @@
 import React from 'react';
 
-export default function UserCard({ user, handleProfileClick }) {
-  console.log(user);
+export default function UserCard({ user, handleProfileClick, status }) {
   return (
     <button
+      className={`userCard ${status}`}
       onClick={() => {
         handleProfileClick(user.username);
       }}
-      className="userCard"
     >
-      <p>Username: {user.username}</p>
+      <p className="username">Username: {user.username}</p>
       <img
         className="profilePic"
         src={user.avatar_url}
         alt={`${user.username}`}
       />
-      <p>Name: {user.name}</p>
+      <p className="name">Name: {user.name}</p>
     </button>
   );
 }

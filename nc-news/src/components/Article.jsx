@@ -38,7 +38,6 @@ export default class Article extends Component {
                 <Voter votes={votes} type="articles" id={article_id} />
               )}
             </div>
-            {console.log(this.props.user === author)}
             {(this.props.user === author ||
               this.props.user === 'administrator') && (
               <div className="delete">
