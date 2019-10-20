@@ -37,3 +37,15 @@ exports.getAllUsers = async () => {
   const { data } = await request.get('/users');
   return data.users;
 };
+exports.postTopic = async (slug, description) => {
+  await request.post(`/topics`, { slug, description });
+};
+exports.postArticle = async (title, topic, author, body) => {
+  const { data } = await request.post(`/articles`, {
+    title,
+    topic,
+    author,
+    body
+  });
+  return data.article;
+};

@@ -9,22 +9,22 @@ export default class CommentForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <p>
-          {!!this.props.user.length
-            ? 'Post a comment!'
-            : 'Please sign in to post a comment.'}
-        </p>
-        {!!this.props.user.length && (
+        {this.props.user === 'administrator' && (
+          <p>The administrator account cannot post comments.</p>
+        )}
+        {!this.props.user.length && <p>Please sign in to post comments!</p>}
+        {!!this.props.user.length && this.props.user !== 'administrator' && (
           <>
+            <p>Post a comment!</p>
             <input
               className={`textbox ${
-                this.state.comment.length === 140 ? 'full' : ''
+                this.state.comment.length === 180 ? 'full' : ''
               }`}
               onChange={this.handleChange}
               value={this.state.comment}
               type="text"
             />
-            <p>Characters left:{140 - this.state.comment.length}</p>
+            <p>Characters left:{180 - this.state.comment.length}</p>
             <button className="post">Post</button>
           </>
         )}
@@ -32,7 +32,7 @@ export default class CommentForm extends Component {
     );
   }
   handleChange = event => {
-    if (event.target.value.length < 141) {
+    if (event.target.value.length < 181) {
       this.setState({ comment: event.target.value });
     }
   };

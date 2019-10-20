@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as api from '../utils/api';
 import ArticleCard from './ArticleCard';
 import Pagination from './Pagination';
-import { navigate } from '@reach/router';
+import { navigate, Link } from '@reach/router';
 
 export default class Articles extends Component {
   state = {
@@ -37,9 +37,32 @@ export default class Articles extends Component {
             />
           )}
         </section>
-        {this.state.checked && this.state.article_count === '0' && (
-          <h1>{`There are no articles about ${this.props.topic}, would you like to make one?`}</h1>
-        )}
+        {this.state.checked &&
+          this.state.article_count === '0' &&
+          this.props.topic.length >= 16 && (
+            <h1>
+              Topics over 15 letters long are not allowed. Please press the back
+              button to return to the previous page.
+            </h1>
+          )}
+        {this.state.checked &&
+          this.state.article_count === '0' &&
+          this.props.topic.length < 15 && (
+            <>
+              <h1>{`There are no articles about ${this.props.topic}, would you like to make one?`}</h1>
+              <Link
+                to="/articles"
+                onClick={() => {
+                  localStorage.setItem(
+                    'topic',
+                    JSON.stringify(this.props.topic)
+                  );
+                }}
+              >
+                New Article
+              </Link>
+            </>
+          )}
         {this.state.articles.map((article, index) => {
           return (
             <ArticleCard
@@ -62,9 +85,13 @@ export default class Articles extends Component {
   componentDidMount() {
     const sort_by = JSON.parse(localStorage.getItem('sort_by'));
     const order = JSON.parse(localStorage.getItem('order'));
-    this.setState({ order, sort_by }, () => {
+    if (sort_by && order) {
+      this.setState({ order, sort_by }, () => {
+        this.fetchArticles();
+      });
+    } else {
       this.fetchArticles();
-    });
+    }
   }
   componentDidUpdate(prevProps) {
     if (prevProps.topic !== this.props.topic) {
@@ -74,8 +101,10 @@ export default class Articles extends Component {
     }
   }
   componentWillUnmount() {
-    localStorage.setItem('sort_by', JSON.stringify(this.state.sort_by));
-    localStorage.setItem('order', JSON.stringify(this.state.order));
+    if (this.state.sort_by)
+      localStorage.setItem('sort_by', JSON.stringify(this.state.sort_by));
+    if (this.state.order)
+      localStorage.setItem('order', JSON.stringify(this.state.order));
   }
   changeSort = event => {
     let sort_by;

@@ -42,8 +42,10 @@ export default class Article extends Component {
               this.props.user === 'administrator') && (
               <div className="delete">
                 <DeleteButton
+                  type="articles"
                   optimisticDelete={this.optimisticDelete}
                   id={article_id}
+                  topic={topic}
                 />
               </div>
             )}
@@ -70,7 +72,7 @@ export default class Article extends Component {
         let msg;
         if (err.message === 'Network Error')
           msg = `Network error! It is likely that you have lost connection`;
-        else if (!/d+/.test(this.props.article_id)) {
+        else if (!/\d+/.test(Number(this.props.article_id))) {
           msg = `Articles must have numerical IDs, "${this.props.article_id}" is not a valid ID!`;
         } else msg = `Article ${this.props.article_id} not found!`;
         navigate('/Error', {

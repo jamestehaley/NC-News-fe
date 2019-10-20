@@ -59,6 +59,22 @@ button {
   .title {
     font-size: 110%;
   }
+  #title {
+    height: 75px;
+    width: 300px;
+  }
+  #body {
+    height: 200px;
+    width: 300px;
+  }
+  #topic {
+    height: 20px;
+    width: 140px;
+  }
+  #topicTitle {
+    height: 200px;
+    width: 300px;
+  }
 }
 @media only screen and (min-width: 601px) {
   .title {
@@ -89,8 +105,9 @@ button {
 .NCNEWS {
   grid-area: NCNEWS;
   height: 10px;
+  width: 130px;
   text-align: right;
-  align-self: center;
+  justify-self: right;
   position: relative;
   top: -5px;
   right: 5px;
@@ -122,17 +139,20 @@ button {
   overflow-y: scroll;
 }
 .articleCard {
-  padding: 5px;
+  padding: 20px;
   display: grid;
-  grid-template-columns: 4fr 3fr 3fr;
-  grid-template-rows: auto 20px 0px;
+  grid-template-columns: 4fr 3fr;
+  grid-template-rows: auto 20px 15px;
   grid-template-areas:
-    'cardTitle cardTitle cardTopic'
-    'cardAuthor cardVotes .'
-    'cardPublished cardPublished cardComments';
+    'cardTitle cardTitle'
+    'cardAuthor cardVotes '
+    'cardPublished cardPublished'
+    'cardTopic cardComments';
   text-decoration: none;
   color: black;
   margin: 0;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 .article {
   overflow-y: scroll;
@@ -158,66 +178,53 @@ button {
   grid-area: cardTitle;
   color: white;
   font-weight: 500;
+  margin-top: 0px;
   padding: 10px;
   align-self: start;
   justify-self: center;
-  width: 90%;
+  width: 100%;
 }
 .articleCard .cardTitle {
   position: relative;
-  top: -18px;
 }
 .cardTopic {
   grid-area: cardTopic;
-  align-self: center;
-  justify-self: center;
 }
 .articleCard .cardTopic {
   position: relative;
-  top: -15%;
+  text-align: left;
 }
 .cardAuthor {
   grid-area: cardAuthor;
-  align-self: center;
-  justify-self: start;
-  text-align: left;
-  width: 50vw;
 }
 .articleCard .cardAuthor {
   position: relative;
-  top: -30px;
-  left: 6%;
+  top: -20px;
+  text-align: left;
 }
 .cardPublished {
   grid-area: cardPublished;
-
   text-align: left;
 }
 .articleCard .cardPublished {
   position: relative;
-  top: -30px;
-  left: 4%;
+  top: 3px;
 }
 .cardVotes {
   grid-area: cardVotes;
   position: relative;
-  left: -5px;
-  top: -10px;
 }
 .articleCard .cardVotes {
   position: relative;
-  top: -30px;
-  left: -10px;
+  text-align: right;
+  top: -5px;
 }
 .cardComments {
   grid-area: cardComments;
 }
 .articleCard .cardComments {
+  text-align: right;
   position: relative;
-  top: -66px;
-}
-.article .cardComments {
-  width: 40vw;
 }
 .cardBody {
   grid-area: cardBody;
@@ -319,14 +326,15 @@ Note: Beware of modifying this element as it can break the animations - you shou
   background-color: #ffffff;
 }
 .textbox {
-  margin-top: 20px;
-  width: 90%;
+  width: 50%;
+  height: 70px;
   resize: none;
   overflow-wrap: break-word;
   text-align: left;
   justify-content: start;
   align-content: start;
-  padding-bottom: 100px;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 .Error {
   padding-top: 25%;
@@ -363,18 +371,50 @@ Note: Beware of modifying this element as it can break the animations - you shou
   text-decoration: none;
 }
 .userCard {
+  margin-top: 20px;
+
   width: 200px;
   height: 200px;
 }
 
 .full {
-  border: solid 1px red;
+  border: solid 2px red;
 }
 .userList h2 {
+  display: grid;
+  grid-template-columns: 1fr;
   padding: 0;
   margin: 0;
 }
 ul {
   margin: 0;
   padding: 0;
+}
+
+form {
+  margin-top: 20px;
+}
+#title {
+  font-size: 150%;
+  font-family: Gotham book;
+  height: 75px;
+  width: 70%;
+}
+#body {
+  font-size: 110%;
+  font-family: Gotham book;
+  height: 300px;
+  width: 70%;
+}
+#topic {
+  font-size: 110%;
+  font-family: Gotham book;
+  height: 20px;
+  width: 220px;
+}
+#topicTitle {
+  font-size: 150%;
+  font-family: Gotham book;
+  height: 60px;
+  width: 70%;
 }

@@ -20,12 +20,14 @@ export default class Users extends Component {
           <>
             {[admin, ...this.state.users].map((user, index) => {
               return (
-                <UserCard
-                  status={index % 2 === 0 ? 'odd' : 'even'}
-                  key={user.username}
-                  user={user}
-                  handleProfileClick={this.props.handleProfileClick}
-                />
+                <div>
+                  <UserCard
+                    status={index % 2 === 0 ? 'odd' : 'even'}
+                    key={user.username}
+                    user={user}
+                    handleProfileClick={this.props.handleProfileClick}
+                  />
+                </div>
               );
             })}
           </>
