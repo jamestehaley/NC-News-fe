@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import * as api from '../utils/api';
-import ArticleCard from './ArticleCard';
-import Pagination from './Pagination';
-import { navigate, Link } from '@reach/router';
+import React, { Component } from "react";
+import * as api from "../utils/api";
+import ArticleCard from "./ArticleCard";
+import Pagination from "./Pagination";
+import { navigate, Link } from "@reach/router";
 
 export default class Articles extends Component {
   state = {
     articles: [],
     article_count: 0,
-    sort_by: 'created_at',
-    order: 'desc',
+    sort_by: "created_at",
+    order: "desc",
     p: 0,
     checked: false
   };
@@ -18,7 +18,7 @@ export default class Articles extends Component {
       <main>
         <section className="salmon">
           <p>
-            Total {this.props.topic && `${this.props.topic} `}articles:{' '}
+            Total {this.props.topic && `${this.props.topic} `}articles:{" "}
             {this.state.article_count}
           </p>
           <span>Sort by: </span>
@@ -29,6 +29,17 @@ export default class Articles extends Component {
             <option value="votes">Most votes</option>
           </select>
           <br />
+          <div className="newArticle">
+            <Link
+              to="/articles"
+              onClick={() => {
+                localStorage.setItem("topic", JSON.stringify(this.props.topic));
+              }}
+            >
+              New Article
+            </Link>
+          </div>
+          <br />
           {this.state.article_count > 10 && (
             <Pagination
               p={this.state.p}
@@ -38,7 +49,7 @@ export default class Articles extends Component {
           )}
         </section>
         {this.state.checked &&
-          this.state.article_count === '0' &&
+          this.state.article_count === "0" &&
           this.props.topic.length >= 16 && (
             <h1>
               Topics over 15 letters long are not allowed. Please press the back
@@ -46,27 +57,29 @@ export default class Articles extends Component {
             </h1>
           )}
         {this.state.checked &&
-          this.state.article_count === '0' &&
+          this.state.article_count === "0" &&
           this.props.topic.length < 15 && (
             <>
               <h1>{`There are no articles about ${this.props.topic}, would you like to make one?`}</h1>
-              <Link
-                to="/articles"
-                onClick={() => {
-                  localStorage.setItem(
-                    'topic',
-                    JSON.stringify(this.props.topic)
-                  );
-                }}
-              >
-                New Article
-              </Link>
+              <div className="newArticle">
+                <Link
+                  to="/articles"
+                  onClick={() => {
+                    localStorage.setItem(
+                      "topic",
+                      JSON.stringify(this.props.topic)
+                    );
+                  }}
+                >
+                  New Article
+                </Link>
+              </div>
             </>
           )}
         {this.state.articles.map((article, index) => {
           return (
             <ArticleCard
-              status={index % 2 === 0 ? 'odd' : 'even'}
+              status={index % 2 === 0 ? "odd" : "even"}
               key={article.article_id}
               article={article}
             />
@@ -83,8 +96,8 @@ export default class Articles extends Component {
     );
   }
   componentDidMount() {
-    const sort_by = JSON.parse(localStorage.getItem('sort_by'));
-    const order = JSON.parse(localStorage.getItem('order'));
+    const sort_by = JSON.parse(localStorage.getItem("sort_by"));
+    const order = JSON.parse(localStorage.getItem("order"));
     if (sort_by && order) {
       this.setState({ order, sort_by }, () => {
         this.fetchArticles();
@@ -102,25 +115,25 @@ export default class Articles extends Component {
   }
   componentWillUnmount() {
     if (this.state.sort_by)
-      localStorage.setItem('sort_by', JSON.stringify(this.state.sort_by));
+      localStorage.setItem("sort_by", JSON.stringify(this.state.sort_by));
     if (this.state.order)
-      localStorage.setItem('order', JSON.stringify(this.state.order));
+      localStorage.setItem("order", JSON.stringify(this.state.order));
   }
   changeSort = event => {
     let sort_by;
     let order;
-    if (event.target.value === 'comments') {
-      sort_by = 'comment_count';
-      order = 'desc';
-    } else if (event.target.value === 'votes') {
-      sort_by = 'votes';
-      order = 'desc';
-    } else if (event.target.value === 'oldest') {
-      sort_by = 'created_at';
-      order = 'asc';
-    } else if (event.target.value === 'newest') {
-      sort_by = 'created_at';
-      order = 'desc';
+    if (event.target.value === "comments") {
+      sort_by = "comment_count";
+      order = "desc";
+    } else if (event.target.value === "votes") {
+      sort_by = "votes";
+      order = "desc";
+    } else if (event.target.value === "oldest") {
+      sort_by = "created_at";
+      order = "asc";
+    } else if (event.target.value === "newest") {
+      sort_by = "created_at";
+      order = "desc";
     }
     this.setState({ order, sort_by, p: 0 }, () => {
       this.fetchArticles();
@@ -144,10 +157,10 @@ export default class Articles extends Component {
       })
       .catch(err => {
         let msg;
-        if (err.message === 'Network Error')
+        if (err.message === "Network Error")
           msg = `Network error! It is likely that you have lost connection`;
         else msg = `Unknown Error!`;
-        navigate('/Error', {
+        navigate("/Error", {
           state: { msg },
           replace: true
         });

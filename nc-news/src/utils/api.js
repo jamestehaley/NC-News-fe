@@ -1,16 +1,16 @@
-const axios = require('axios');
+const axios = require("axios");
 
 const request = axios.create({
-  baseURL: 'https://nc-news-jamesteh.herokuapp.com/api'
+  baseURL: "https://nc-news-jamesteh.herokuapp.com/api"
 });
 
 exports.getAllTopics = async () => {
-  const { data } = await request.get('/topics');
+  const { data } = await request.get("/topics");
   return data.topics;
 };
 
 exports.getArticles = async (topic, sort_by, order, author, p) => {
-  const { data } = await request.get('/articles', {
+  const { data } = await request.get("/articles", {
     params: { topic, sort_by, order, author, p }
   });
   return data;
@@ -34,7 +34,7 @@ exports.incVotes = async (type, id, inc_votes) => {
   await request.patch(`/${type}/${id}`, { inc_votes });
 };
 exports.getAllUsers = async () => {
-  const { data } = await request.get('/users');
+  const { data } = await request.get("/users");
   return data.users;
 };
 exports.postTopic = async (slug, description) => {
@@ -48,4 +48,7 @@ exports.postArticle = async (title, topic, author, body) => {
     body
   });
   return data.article;
+};
+exports.deleteTopic = async topic => {
+  await request.delete(`/topics/${topic}`);
 };
