@@ -1,6 +1,6 @@
-exports.secondsToTimeString = seconds => {
-  if (!seconds) return '0 seconds';
-  let message = '';
+export const secondsToTimeString = seconds => {
+  if (!seconds) return "0 seconds";
+  let message = "";
   const s = seconds % 60;
   const m = ((seconds - s) % 3600) / 60;
   const h = ((seconds - m * 60 - s) % 86400) / 3600;
@@ -32,14 +32,14 @@ exports.secondsToTimeString = seconds => {
     return message;
   }
 };
-exports.shortenNumbers = num => {
-  const arr = String(num).split('');
+export const shortenNumbers = num => {
+  const arr = String(num).split("");
 
   if (arr.length > 6) {
-    return `${arr.slice(0, -6).join('')}M`;
+    return `${arr.slice(0, -6).join("")}M`;
   }
   if (arr.length > 3) {
-    return `${arr.slice(0, -3).join('')}K`;
+    return `${arr.slice(0, -3).join("")}K`;
   }
   return String(num);
 };

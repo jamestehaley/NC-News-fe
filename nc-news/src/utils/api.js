@@ -4,43 +4,43 @@ const request = axios.create({
   baseURL: "https://nc-news-jamesteh.herokuapp.com/api"
 });
 
-exports.getAllTopics = async () => {
+export const getAllTopics = async () => {
   const { data } = await request.get("/topics");
   return data.topics;
 };
 
-exports.getArticles = async (topic, sort_by, order, author, p) => {
+export const getArticles = async (topic, sort_by, order, author, p) => {
   const { data } = await request.get("/articles", {
     params: { topic, sort_by, order, author, p }
   });
   return data;
 };
 
-exports.getArticle = async uri => {
+export const getArticle = async uri => {
   const { data } = await request.get(uri);
   return data.article;
 };
-exports.getComments = async (uri, p) => {
+export const getComments = async (uri, p) => {
   const { data } = await request.get(`${uri}/comments`, { params: { p } });
   return data.comments;
 };
-exports.postComment = async (body, username, uri) => {
+export const postComment = async (body, username, uri) => {
   await request.post(`${uri}/comments`, { username, body });
 };
-exports.delete = async (id, type) => {
+export const deleteAny = async (id, type) => {
   await request.delete(`/${type}/${id}`);
 };
-exports.incVotes = async (type, id, inc_votes) => {
+export const incVotes = async (type, id, inc_votes) => {
   await request.patch(`/${type}/${id}`, { inc_votes });
 };
-exports.getAllUsers = async () => {
+export const getAllUsers = async () => {
   const { data } = await request.get("/users");
   return data.users;
 };
-exports.postTopic = async (slug, description) => {
+export const postTopic = async (slug, description) => {
   await request.post(`/topics`, { slug, description });
 };
-exports.postArticle = async (title, topic, author, body) => {
+export const postArticle = async (title, topic, author, body) => {
   const { data } = await request.post(`/articles`, {
     title,
     topic,
@@ -49,6 +49,6 @@ exports.postArticle = async (title, topic, author, body) => {
   });
   return data.article;
 };
-exports.deleteTopic = async topic => {
+export const deleteTopic = async topic => {
   await request.delete(`/topics/${topic}`);
 };

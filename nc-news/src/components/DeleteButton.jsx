@@ -15,7 +15,7 @@ export default class DeleteButton extends Component {
       this.setState({ confirm: true });
     } else {
       api
-        .delete(this.props.id, this.props.type)
+        .deleteAny(this.props.id, this.props.type)
         .then(() => {
           if (this.props.topic && this.props.type === "articles") {
             api
