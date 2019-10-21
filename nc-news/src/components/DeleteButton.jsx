@@ -18,11 +18,14 @@ export default class DeleteButton extends Component {
         .delete(this.props.id, this.props.type)
         .then(() => {
           if (this.props.topic && this.props.type === "articles") {
-            api.getArticles(this.props.topic).then(data => {
-              if (data.article_count === 0) {
-                api.deleteTopic(this.props.topic);
-              }
-            });
+            api
+              .getArticles(this.props.topic)
+              .then(data => {
+                if (+data.article_count === 0) {
+                  api.deleteTopic(this.props.topic);
+                }
+              })
+              .catch(console.log);
           }
         })
         .catch(() => {

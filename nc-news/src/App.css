@@ -120,10 +120,10 @@ button {
 }
 .topic {
   grid-area: topic;
-  overflow-y: scroll;
 }
 .topic ul {
-  height: 100%;
+  height: 83vh;
+  overflow-y: scroll;
 }
 .topic ul li {
   padding-top: 20px;
