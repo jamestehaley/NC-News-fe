@@ -16,8 +16,6 @@ git clone https://github.com/exampleusername/NC-News-fe.git
 
 In order to install dependencies, ensure that you are in the root directory of this project, and type the following into the terminal:
 
-In order to install dependencies, ensure that you are in the root directory of this project, and type the following into the terminal:
-
 ```
 npm install
 ```
