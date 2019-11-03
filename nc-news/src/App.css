@@ -1,8 +1,8 @@
 @font-face {
-  font-family: "Gotham Book";
+  font-family: 'Gotham Book';
   font-style: normal;
   font-weight: normal;
-  src: local("Gotham Book"), url("GOTHAMBOOK.woff") format("woff");
+  src: local('Gotham Book'), url('GOTHAMBOOK.woff') format('woff');
 }
 .App {
   margin: 0;
@@ -15,8 +15,8 @@
   grid-template-columns: 0fr 10fr;
   grid-template-rows: 106px 1fr;
   grid-template-areas:
-    "header header"
-    "topic  main";
+    'header header'
+    'topic  main';
 }
 button {
   background-color: inherit;
@@ -48,13 +48,13 @@ button {
   color: white;
   display: grid;
   grid-template-columns: 30px 3fr 2fr 2fr;
-  grid-template-areas: ". title login NCNEWS";
+  grid-template-areas: '. title login NCNEWS';
   height: 106px;
 }
 @media only screen and (max-width: 600px) {
   .header {
     grid-template-columns: 30px 3fr 2fr;
-    grid-template-areas: ". title login" ". title NCNEWS";
+    grid-template-areas: '. title login' '. title NCNEWS';
   }
   .title {
     font-size: 110%;
@@ -144,10 +144,10 @@ button {
   grid-template-columns: 4fr 3fr;
   grid-template-rows: auto 20px 15px;
   grid-template-areas:
-    "cardTitle cardTitle"
-    "cardAuthor cardVotes "
-    "cardPublished cardPublished"
-    "cardTopic cardComments";
+    'cardTitle cardTitle'
+    'cardAuthor cardVotes '
+    'cardPublished cardPublished'
+    'cardTopic cardComments';
   text-decoration: none;
   color: black;
   margin: 0;
@@ -161,12 +161,12 @@ button {
   display: grid;
   grid-template-columns: 2fr 2fr 1fr;
   grid-template-areas:
-    "cardTitle cardTitle cardTitle"
-    "cardAuthor . cardTopic"
-    "cardPublished cardPublished cardPublished"
-    "cardBody cardBody cardBody"
-    "cardVotes delete cardComments"
-    "comments comments comments";
+    'cardTitle cardTitle cardTitle'
+    'cardAuthor . cardTopic'
+    'cardPublished cardPublished cardPublished'
+    'cardBody cardBody cardBody'
+    'cardVotes delete cardComments'
+    'comments comments comments';
   text-decoration: none;
   color: black;
 }
@@ -422,14 +422,13 @@ form {
 .newArticle {
   background-color: #202829;
   height: 17px;
-  padding: 2px;
+  padding: 4px;
   text-decoration: none;
-  justify-self: center;
+  align-self: center;
   width: 100px;
-  position: relative;
-  top: 0px;
-  left: 46%;
+  margin: auto;
   margin-top: 5px;
+  margin-bottom: -15px;
 }
 .newArticle a {
   color: #ffffff;
