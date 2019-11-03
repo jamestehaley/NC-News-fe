@@ -28,9 +28,9 @@ npm start
 
 ## How to use NC News
 
-Upon opening the website, **after a period of loading**, you should find yourself on a page showing all articles. From here you can click anywhere on an article to view it in full with its comments, press the three bars in the top left to pick a topic of articles to view, or select ordering criteria or page using the search options above the article list. By default, you are not logged in, but can easily sign in to any existing profile just by clicking on the sign in button, and then selecting a user. This was a decision based upon the fact that there is no encrypted authentication for this website.
+Upon opening the website, **after a period of loading**, you should find yourself on a page showing all articles. From here you can click anywhere on an article to view it in full with its comments, press the three bars in the top left to pick a topic of articles to view, or select ordering criteria and page using the search options above the article list. By default, you are not logged in, but can easily sign in to any existing profile just by clicking on the sign in button, and then selecting a user. This was a decision based upon the fact that there is no encrypted authentication for this website.
 
-Once logged in, to post a new article, click on the New Article button on the articles list. If the user wishes, they can additionally make a new topic for the article using the new article page, which adds it to the sidebar.
+Once logged in, to post a new article, click on the New Article button on the articles list. If you wish, you can additionally make a new topic for the article using the new article page, which adds it to the sidebar.
 
 Posting comments is similar: on an article page, any user can post comments, but only the user who posted them or the 'administator' account can delete them. The same requirements exist for deleting articles.
 
